@@ -1,30 +1,57 @@
-import Card from "@/component/About/Card"
 import Mission from "@/component/About/Mission"
 
-const Top = () => {
+const offerings = [
+  "Hands-On Workshops",
+  "Expert-Led Webinars",
+  "Community Networking",
+];
+
+const About = () => {
   return (
-    <div id="about" className="w-full flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 scroll-mt-[70px]">
-      <h1 className="text-center text-sm sm:text-base md:text-lg lg:text-xl max-w-4xl">
-        We offer a mix of educational programs and community-driven activities
-        designed to help you excel in AWS.
-      </h1>
-      <div className="flex flex-wrap justify-center mt-6 sm:mt-8 items-center w-full max-w-7xl pb-4 gap-4 sm:gap-6 lg:gap-8">
-        <Card
-          title="Hands-On Workshops"
-          subtitle="Practical, interactive sessions to help you build real-world AWS skills."
-        />
-        <Card
-          title="Expert-Led Webinars"
-          subtitle="Learn from industry professionals with deep AWS experience."
-        />
-        <Card
-          title="Community Networking"
-          subtitle="Connect, collaborate, and grow with other cloud enthusiasts."
-        />
+    <div id="about" className="relative w-full px-4 sm:px-6 lg:px-8 py-12 scroll-mt-[70px] overflow-hidden">
+      {/* constellation decorations */}
+      <div className="pointer-events-none absolute top-10 right-6 hidden md:block">
+        <svg width="220" height="160" viewBox="0 0 220 160" fill="none">
+          <polyline points="20,40 70,20 120,60 180,30 200,90" stroke="rgba(255,255,255,0.35)" strokeWidth="1" fill="none" />
+          <circle className="animate-twinkle" cx="20" cy="40" r="2" fill="#fff" />
+          <circle className="animate-twinkle" cx="70" cy="20" r="2.5" fill="#fff" />
+          <circle className="animate-twinkle" cx="120" cy="60" r="2" fill="#fff" />
+          <circle className="animate-twinkle" cx="180" cy="30" r="3" fill="#fff" />
+          <circle className="animate-twinkle" cx="200" cy="90" r="2" fill="#fff" />
+        </svg>
       </div>
-      <Mission />
+      <div className="pointer-events-none absolute bottom-6 left-4 hidden md:block">
+        <svg width="200" height="150" viewBox="0 0 200 150" fill="none">
+          <polyline points="10,70 60,40 90,90 150,60 180,110" stroke="rgba(255,255,255,0.35)" strokeWidth="1" fill="none" />
+          <circle className="animate-twinkle" cx="10" cy="70" r="2" fill="#fff" />
+          <circle className="animate-twinkle" cx="60" cy="40" r="3" fill="#fff" />
+          <circle className="animate-twinkle" cx="90" cy="90" r="2" fill="#fff" />
+          <circle className="animate-twinkle" cx="150" cy="60" r="2.5" fill="#fff" />
+          <circle className="animate-twinkle" cx="180" cy="110" r="2" fill="#fff" />
+        </svg>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        {/* left: heading + pill buttons */}
+        <div className="flex flex-col gap-8">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-medium text-white">What we offer</h1>
+          <div className="flex flex-col gap-5 max-w-md">
+            {offerings.map((label) => (
+              <button
+                key={label}
+                className="pill-purple aura-maroon-btn font-tektur tracking-widest uppercase text-white rounded-full py-4 px-6 text-sm sm:text-base transition-transform duration-300 hover:scale-[1.02]"
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* right: MISSION / VISION tech frames */}
+        <Mission />
+      </div>
     </div>
   );
 };
 
-export default Top;
+export default About;

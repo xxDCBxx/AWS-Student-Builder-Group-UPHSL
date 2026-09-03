@@ -1,37 +1,44 @@
-import { IoEyeSharp } from "react-icons/io5";
-import { SlTarget } from "react-icons/sl";
-
 const Mission = () => {
   return (
-    <div className='flex justify-center items-stretch flex-col lg:flex-row py-6 sm:py-8 px-4 sm:px-6 md:px-8 lg:px-16 gap-6 sm:gap-8 w-full max-w-7xl mx-auto'>
-
-      <div className='flex flex-col items-center border-2 border-[#cc8232] p-4 sm:p-6 md:p-8 rounded-xl w-full lg:w-1/2 bg-white/10 backdrop-blur-3xl min-h-[250px] sm:min-h-[300px] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-[#ffa23f] will-change-transform' >
-        <SlTarget size={22} className="absolute top-9"/>
-        <div
-          className="w-[22px] h-0 rounded-full absolute top-12"
-          style={{ boxShadow: "0 0 30px 20px rgba(255, 162, 63, 0.4)" }}
-        ></div>
-        <h1 className="text-lg sm:text-xl md:text-2xl font-semibold mt-12 sm:mt-14 mb-3 sm:mb-4">MISSION</h1>
-        <h2 className="text-center mx-2 sm:mx-4 text-xs sm:text-sm md:text-base leading-relaxed">
-          "Our mission is to foster a friendly and collaborative
-          environment where individuals interested in technology,
-          especially AWS and cloud computing, can connect, learn, and
-          grow. We aim to support members in developing their cloud
-          skills, building meaningful connections, and exploring
-          innovative solutions in the tech industry."
-        </h2>
+    <div className="flex flex-col gap-10">
+      {/* MISSION */}
+      <div className="flex flex-col items-center">
+        <h2 className="font-tektur tracking-widest text-white text-lg sm:text-xl mb-3">MISSION</h2>
+        <div className="relative w-full">
+          <div
+            className="tech-frame bg-black/40 backdrop-blur-sm p-6 text-center"
+            style={{ clipPath: "polygon(4% 0, 96% 0, 100% 25%, 100% 100%, 4% 100%, 0 75%, 0 0)" }}
+          >
+            <p className="font-tektur text-[10px] sm:text-xs leading-relaxed text-white/90">
+              &quot;Our mission is to foster a friendly and collaborative environment where individuals interested in technology, especially AWS and cloud computing, can connect, learn, and grow. We aim to support members in developing their cloud skills, building meaningful connections, and exploring innovative solutions in the tech industry.&quot;
+            </p>
+          </div>
+          {/* circuit connector */}
+          <svg className="absolute -bottom-6 -left-6 hidden sm:block" width="120" height="40" viewBox="0 0 120 40" fill="none">
+            <path d="M10,30 L40,30 L55,15 L115,15" stroke="#c026d3" strokeWidth="1.5" fill="none" />
+            <circle cx="10" cy="30" r="4" fill="none" stroke="#c026d3" strokeWidth="1.5" />
+          </svg>
+        </div>
       </div>
 
-      <div className='flex flex-col items-center border-2 border-[#cc8232] p-4 sm:p-6 md:p-8 rounded-xl w-full lg:w-1/2 bg-white/10 backdrop-blur-3xl min-h-[250px] sm:min-h-[300px] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-[#ffa23f] will-change-transform' >
-        <IoEyeSharp size={22} className="absolute top-9"/>
-        <div
-          className="w-[22px] h-0 rounded-full absolute top-12"
-          style={{ boxShadow: "0 0 30px 20px rgba(255, 162, 63, 0.4)" }}
-        ></div>
-        <h1 className="text-lg sm:text-xl md:text-2xl font-semibold mt-12 sm:mt-14 mb-3 sm:mb-4">VISION</h1>
-        <h2 className="text-center mx-2 sm:mx-4 text-xs sm:text-sm md:text-base leading-relaxed">
-         "To create a supportive space at the University of Perpetual Help System Laguna, where students and tech enthusiasts can come together to explore, learn, and share emerging technologies, with a focus on AWS and cloud computing."
-        </h2>
+      {/* VISION */}
+      <div className="flex flex-col items-center">
+        <h2 className="font-tektur tracking-widest text-white text-lg sm:text-xl mb-3">VISION</h2>
+        <div className="relative w-full">
+          <div
+            className="tech-frame bg-black/40 backdrop-blur-sm p-6 text-center"
+            style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 8% 100%, 0 70%)" }}
+          >
+            <p className="font-tektur text-[10px] sm:text-xs leading-relaxed text-white/90">
+              &quot;To create a supportive space at the University of Perpetual Help System Laguna, where students and tech enthusiasts can come together to explore, learn, and share emerging technologies, with a focus on AWS and cloud computing.&quot;
+            </p>
+          </div>
+          {/* circuit connector */}
+          <svg className="absolute -bottom-6 -right-6 hidden sm:block" width="120" height="40" viewBox="0 0 120 40" fill="none">
+            <path d="M110,30 L80,30 L65,15 L5,15" stroke="#c026d3" strokeWidth="1.5" fill="none" />
+            <circle cx="110" cy="30" r="4" fill="none" stroke="#c026d3" strokeWidth="1.5" />
+          </svg>
+        </div>
       </div>
     </div>
   )

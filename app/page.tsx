@@ -22,10 +22,11 @@ const Page = () => {
       <Header />
       <Hero />
       <About />
+      <Contact />
       <Event />
       <UpcomingEvent />
-      <Team />     
-      <Contact />
+      <Team />
+
     </div>
   )
 }
