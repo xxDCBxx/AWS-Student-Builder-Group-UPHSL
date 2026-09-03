@@ -31,23 +31,8 @@ const About = () => {
         </svg>
       </div>
 
-      <div className="relative max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-        {/* left: heading + pill buttons */}
-        <div className="flex flex-col gap-8">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-medium text-white">What we offer</h1>
-          <div className="flex flex-col gap-5 max-w-md">
-            {offerings.map((label) => (
-              <button
-                key={label}
-                className="pill-purple aura-maroon-btn font-tektur tracking-widest uppercase text-white rounded-full py-4 px-6 text-sm sm:text-base transition-transform duration-300 hover:scale-[1.02]"
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* right: MISSION / VISION tech frames */}
+      <div className="relative max-w-7xl mx-auto">
+        {/* MISSION / VISION full width */}
         <Mission />
       </div>
     </div>
