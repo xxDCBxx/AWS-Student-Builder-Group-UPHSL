@@ -7,7 +7,7 @@ import ArrowRight from "@/component/UI/ArrowRight";
 
 const members = [
   { name: "Marc Angelo Casugbo", role: "President", img: "/data/New Officers/Marc Angelo Casugbo - President.png" },
-  { name: "Rain Jade De Castro", role: "Vice President", img: "/data/New Officers/Rain Jade De Castro - Vice President.png" },
+  { name: "Rain Jade De Castro", role: "Vice President", img: "/data/New Officers/Rain Jade De Castro - Vice President.webp" },
   { name: "Zain Raza Khan", role: "Head of Operations (HO)", img: "/data/New Officers/Zain Raza Khan - Head of Operations (HO).png" },
   { name: "Trisha Biglete", role: "Head of Relations and Community Outreach (HRC)", img: "/data/New Officers/Trisha Biglete - Head of Relations and Community Outreach (HRC).png" },
   { name: "Alyssa Marie Valera", role: "Head of Marketing and Multimedia (HMM)", img: "/data/New Officers/Alyssa Marie Valera - Head of Marketing and Multimedia (HMM).png" },
