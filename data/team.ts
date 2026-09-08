@@ -1,220 +1,325 @@
-  type TeamMember = {
-    img: string;
-    name: string;
-    title: string;
-    subtitle: string;
-    facebook?: string;
-    linkedin?: string;
-  }
-  
-  
-  export const teamMembers: TeamMember[] = [
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "Consultant",
-      subtitle: "Leads the organization and sets overall direction.",
-      facebook: "",
-      linkedin: ""
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "President",
-      subtitle: "Leads the organization and sets overall direction.",
-      facebook: "",
-      linkedin: ""
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "Vice President",
-      subtitle: "Supports the president and oversees operations.",
-      facebook: "",
-      linkedin: ""
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "Executive Secretary",
-      subtitle: "Manages records, documentation, and official communications.",
-      facebook: "",
-      linkedin: ""
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "Associate Secretary",
-      subtitle: "Assists in administrative tasks and coordination.",
-      facebook: "",
-      linkedin: ""
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "Treasurer",
-      subtitle: "Manages finances, budgeting, and financial reporting.",
-      facebook: "",
-      linkedin: ""
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "Auditor",
-      subtitle: "Ensures financial transparency and compliance.",
-      facebook: "",
-      linkedin: ""
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "Head of Operations",
-      subtitle: "Oversees day-to-day operations and project management.",
-      facebook: "",
-      linkedin: ""
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "Head of Relations and Community Outreach",
-      subtitle: "Builds and maintains relationships with external partners and the community.",
-      facebook: "",
-      linkedin: ""
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "Head of Marketing and Multimedia",
-      subtitle: "Leads marketing strategies and multimedia content creation.",
-      facebook: "",
-      linkedin: ""
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "Logistics Coordinator",
-      subtitle: "Manages logistics, resources, and event needs.",
-      facebook: "",
-      linkedin: ""
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "Support Staff",
-      subtitle: "Provides operational and logistical support.",
-      facebook: "",
-      linkedin: ""
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "Community Manager",
-      subtitle: "Oversees community engagement and member relations.",
-      facebook: "",
-      linkedin: ""
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "Internal Relation Officer",
-      subtitle: "Manages internal communications and team coordination.",
-      facebook: "",
-      linkedin: ""
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "External Relation Officer",
-      subtitle: "Handles external partnerships and collaborations.",
-      facebook: "",
-      linkedin: "" 
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "Content Manager",
-      subtitle: "Creates and manages written and digital content.",
-      facebook: "",
-      linkedin: ""
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "Social Media Marketing Manager",
-      subtitle: "Develops and executes social media strategies to enhance online presence.",
-      facebook: "",
-      linkedin: ""
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "Social Media Marketing Specialist",
-      subtitle: "Implements social media campaigns and engages with the online community.",
-      facebook: "",
-      linkedin: ""
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "Communications Manager",
-      subtitle: "Oversees internal and external communications strategies.",
-      facebook: "",
-      linkedin: ""
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "Multimedia Specialist", 
-      subtitle: "Creates video, audio, and multimedia content.",
-      facebook: "",
-      linkedin: ""
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "Video Editor",
-      subtitle: "Edits and produces video content for various platforms.",
-      facebook: "",
-      linkedin: ""
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "Video Editor",
-      subtitle: "Edits and produces video content for various platforms.",
-      facebook: "",
-      linkedin: ""
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "Digital Artist",
-      subtitle: "Creates digital illustrations and visual content.",
-      facebook: "",
-      linkedin: ""
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "Digital Artist",
-      subtitle: "Creates digital illustrations and visual content.",
-      facebook: "",
-      linkedin: ""
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "Graphics Designer",
-      subtitle: "Designs visual content for marketing and promotional materials.",
-      facebook: "",
-      linkedin: ""
-    },
-    {
-      img: "/team/",
-      name: "TBA",
-      title: "Graphics Designer",
-      subtitle: "Designs visual content for marketing and promotional materials.",
-      facebook: "",
-      linkedin: ""
-    },
-  ];
+export type TeamMember = {
+  img: string;
+  name: string;
+  title: string;
+  subtitle: string;
+  facebook?: string;
+  linkedin?: string;
+};
+
+export type TeamYear = {
+  year: string;
+  label: string;
+  members: TeamMember[];
+};
+
+export const teamYears: TeamYear[] = [
+  {
+    year: "2026-2027",
+    label: "2026 – 2027",
+    members: [
+      {
+        img: "/data/New Officers/Zyrus Alvez - Consultant.png",
+        name: "Zyrus Alvez",
+        title: "Consultant",
+        subtitle: "Provides guidance and strategic direction to the organization.",
+        facebook: "https://www.facebook.com/zyrus.alvez.2025/",
+        linkedin: "https://www.linkedin.com/in/zyrus-alvez-089733306/",
+      },
+      {
+        img: "/data/New Officers/Marc Angelo Casugbo - President.png",
+        name: "Marc Angelo Casugbo",
+        title: "President",
+        subtitle: "Leads the organization and sets overall direction.",
+        facebook: "https://www.facebook.com/marc.casugbo",
+        linkedin: "https://www.linkedin.com/in/marc-angelo-casugbo-230323340/",
+      },
+      {
+        img: "/data/New Officers/Rain Jade De Castro - Vice President.webp",
+        name: "Rain Jade De Castro",
+        title: "Vice President",
+        subtitle: "Supports the president and oversees operations.",
+        facebook: "https://www.facebook.com/rainjade.decastro",
+        linkedin: "https://www.linkedin.com/in/rain-jade-de-castro-6bba75339/",
+      },
+      {
+        img: "/data/New Officers/Gil Ashley Bien - Executive Secretary.png",
+        name: "Gil Ashley Bien",
+        title: "Executive Secretary",
+        subtitle: "Manages records, documentation, and official communications.",
+        facebook: "https://www.facebook.com/gil.ashley.bien",
+        linkedin: "",
+      },
+      {
+        img: "/data/New Officers/Auxi Nicole Pongos - Associate Secretary.png",
+        name: "Auxi Nicole Pongos",
+        title: "Associate Secretary",
+        subtitle: "Assists in administrative tasks and coordination.",
+        facebook: "https://www.facebook.com/auxinicole",
+        linkedin: "https://www.linkedin.com/in/auxinicolepongos/",
+      },
+      {
+        img: "/data/New Officers/Zain Raza Khan - Head of Operations (HO).png",
+        name: "Zain Raza Khan",
+        title: "Head of Operations",
+        subtitle: "Oversees day-to-day operations and project management.",
+        facebook: "https://www.facebook.com/zain.khan.607647",
+        linkedin: "",
+      },
+      {
+        img: "/data/New Officers/Norven Zaldy Carandang -Logistics Coordinator.png",
+        name: "Norven Zaldy Carandang",
+        title: "Logistics Coordinator",
+        subtitle: "Manages logistics, resources, and event needs.",
+        facebook: "https://www.facebook.com/nor.ben.37",
+        linkedin: "",
+      },
+      {
+        img: "/data/New Officers/Alliana Faith Palmiery - Support Staff.png",
+        name: "Alliana Faith Palmiery",
+        title: "Support Staff",
+        subtitle: "Provides operational and logistical support.",
+        facebook: "https://www.facebook.com/yanapalmiery",
+        linkedin: "https://www.linkedin.com/in/alliana-faith-palmiery-98401b3b5/",
+      },
+      {
+        img: "/data/New Officers/Trisha Biglete - Head of Relations and Community Outreach (HRC).png",
+        name: "Trisha Biglete",
+        title: "Head of Relations and Community Outreach",
+        subtitle: "Builds and maintains relationships with external partners and the community.",
+        facebook: "https://www.facebook.com/trisha.biglete",
+        linkedin: "https://www.linkedin.com/in/trisha-biglete-434b013ab/",
+      },
+      {
+        img: "/data/New Officers/Lucky Angel Guevarra - Community Manager.png",
+        name: "Lucky Angel Guevarra",
+        title: "Community Manager",
+        subtitle: "Oversees community engagement and member relations.",
+        facebook: "https://www.facebook.com/notur.ether",
+        linkedin: "https://www.linkedin.com/in/lucky-angel-guevarra-815162286/",
+      },
+      {
+        img: "/data/New Officers/Allyza Shamel Hernandez - Internal Relation Officer.png",
+        name: "Allyza Shamel Hernandez",
+        title: "Internal Relation Officer",
+        subtitle: "Manages internal communications and team coordination.",
+        facebook: "https://www.facebook.com/itsmesiamel",
+        linkedin: "",
+      },
+      {
+        img: "/data/New Officers/Don Santiago Sigue - External Relation Officer.png",
+        name: "Don Santiago Sigue",
+        title: "External Relation Officer",
+        subtitle: "Handles external partnerships and collaborations.",
+        facebook: "https://www.facebook.com/don.sigue",
+        linkedin: "",
+      },
+      {
+        img: "/data/New Officers/Yzabel Claurie Nett Mallari - Treasurer.png",
+        name: "Yzabel Claurie Nett Mallari",
+        title: "Treasurer",
+        subtitle: "Manages finances, budgeting, and financial reporting.",
+        facebook: "https://www.facebook.com/xyzabclm",
+        linkedin: "https://www.linkedin.com/in/yzabel-claurie-nett-mallari-6b9468412/",
+      },
+      {
+        img: "/data/New Officers/Claurenz Mallari - Auditor.png",
+        name: "Claurenz Mallari",
+        title: "Auditor",
+        subtitle: "Ensures financial transparency and compliance.",
+        facebook: "https://www.facebook.com/claurenz.mallari.5",
+        linkedin: "https://www.linkedin.com/in/claurenz-mallari-83353a430/",
+      },
+      {
+        img: "/data/New Officers/Alyssa Marie Valera - Head of Marketing and Multimedia (HMM).png",
+        name: "Alyssa Marie Valera",
+        title: "Head of Marketing and Multimedia",
+        subtitle: "Leads marketing strategies and multimedia content creation.",
+        facebook: "https://www.facebook.com/marie.sy.35977897",
+        linkedin: "https://www.linkedin.com/in/alyssa-valera-1553352b3/",
+      },
+      {
+        img: "/data/New Officers/Jedidiah Barcelona - Content Manager.png",
+        name: "Jedidiah Barcelona",
+        title: "Content Manager",
+        subtitle: "Creates and manages written and digital content.",
+        facebook: "https://www.facebook.com/jedidiah.barcelona",
+        linkedin: "",
+      },
+      {
+        img: "/data/New Officers/Angela Shayne Montañez - Social Media Marketing Manager.png",
+        name: "Angela Shayne Montañez",
+        title: "Social Media Marketing Manager",
+        subtitle: "Develops and executes social media strategies to enhance online presence.",
+        facebook: "https://www.facebook.com/cangelmontanez12",
+        linkedin: "https://www.linkedin.com/in/angela-shayne-montanez-b382a1424/",
+      },
+      {
+        img: "/data/New Officers/Irish Nicole Montañez Communications Manager.png",
+        name: "Irish Nicole Montañez",
+        title: "Communications Manager",
+        subtitle: "Oversees internal and external communications strategies.",
+        facebook: "https://www.facebook.com/irishnicole.montanez",
+        linkedin: "",
+      },
+      {
+        img: "/data/New Officers/Jasmine Fae Dictado - Multimedia Specialist.png",
+        name: "Jasmine Fae Dictado",
+        title: "Multimedia Specialist",
+        subtitle: "Creates video, audio, and multimedia content.",
+        facebook: "https://www.facebook.com/min.dictado",
+        linkedin: "https://www.linkedin.com/in/jasmine-fae-dictado-444b063b4/",
+      },
+      {
+        img: "/data/New Officers/Kylle Vincent Amondina - Video Editor.png",
+        name: "Kylle Vincent Amondina",
+        title: "Video Editor",
+        subtitle: "Edits and produces video content for various platforms.",
+        facebook: "https://www.facebook.com/kyllevincent.amondina.1",
+        linkedin: "",
+      },
+      {
+        img: "/data/New Officers/Christopher James Nuqui - Web Development Specialist.png",
+        name: "Christopher James Nuqui",
+        title: "Web Development Specialist",
+        subtitle: "Designs and maintains the organization's web presence.",
+        facebook: "https://www.facebook.com/christopher.nuqui.2025",
+        linkedin: "https://www.linkedin.com/in/christopher-james-nuqui-b958a43b0/",
+      },
+    ],
+  },
+  {
+    year: "2025-2026",
+    label: "2025 – 2026",
+    members: [
+      {
+        img: "/data/Old Officers/Zyrus Alvez - President.webp",
+        name: "Zyrus Alvez",
+        title: "President",
+        subtitle: "Led the organization and set overall direction.",
+        facebook: "https://www.facebook.com/zyrus.alvez.2025/",
+        linkedin: "https://www.linkedin.com/in/zyrus-alvez-089733306/",
+      },
+      {
+        img: "/data/Old Officers/Renzo Ramos - Vice President.webp",
+        name: "Renzo Ramos",
+        title: "Vice President",
+        subtitle: "Supported the president and oversaw operations.",
+        facebook: "https://www.facebook.com/renzoramos22",
+        linkedin: "https://www.linkedin.com/in/renzo-emmanuel-ramos-692154231/",
+      },
+      {
+        img: "/data/Old Officers/Allan John Funelas - Executive Secretary.webp",
+        name: "Allan John Funelas",
+        title: "Executive Secretary",
+        subtitle: "Managed records, documentation, and official communications.",
+        facebook: "https://www.facebook.com/allanjohn.funelas",
+        linkedin: "https://www.linkedin.com/in/allan-john-funelas-145313231/",
+      },
+      {
+        img: "/data/Old Officers/Wilmar Lipata - Associate Secretary.webp",
+        name: "Wilmar Lipata",
+        title: "Associate Secretary",
+        subtitle: "Assisted in administrative tasks and coordination.",
+        facebook: "https://www.facebook.com/wilmar.lipata",
+        linkedin: "https://www.linkedin.com/in/wilmar-lipata-42519633a/",
+      },
+      {
+        img: "/data/Old Officers/Josh Leonard Mendoza - Head of Communications.webp",
+        name: "Josh Leonard Mendoza",
+        title: "Head of Communications",
+        subtitle: "Led communications strategy and outreach.",
+        facebook: "https://www.facebook.com/ttardigrade",
+        linkedin: "https://www.linkedin.com/in/ttetromino/",
+      },
+      {
+        img: "/data/Old Officers/Sherwin Limosnero - P.R.O. External.webp",
+        name: "Sherwin Limosnero",
+        title: "P.R.O. External",
+        subtitle: "Handled external public relations and partnerships.",
+        facebook: "https://www.facebook.com/SherwinLimosneroPH",
+        linkedin: "https://www.linkedin.com/in/sherwinlimosnero/",
+      },
+      {
+        img: "/data/Old Officers/France Raphael Rivera - Marketing Director.webp",
+        name: "France Raphael Rivera",
+        title: "Marketing Director",
+        subtitle: "Led marketing strategies and brand growth.",
+        facebook: "https://www.facebook.com/franceraphael.rivera.3",
+        linkedin: "https://www.linkedin.com/in/francerivera/",
+      },
+      {
+        img: "/data/Old Officers/Richard Torculas - Social Media Marketing Manager.webp",
+        name: "Richard Torculas",
+        title: "Social Media Marketing Manager",
+        subtitle: "Managed and grew the organization's social media presence.",
+        facebook: "https://www.facebook.com/richard.o.torculas",
+        linkedin: "https://www.linkedin.com/in/rtorculas712/",
+      },
+      {
+        img: "/data/Old Officers/Trisha Biglete - Content Manager.webp",
+        name: "Trisha Biglete",
+        title: "Content Manager",
+        subtitle: "Created and managed written and digital content.",
+        facebook: "https://www.facebook.com/trisha.biglete",
+        linkedin: "https://www.linkedin.com/in/trisha-biglete-434b013ab/",
+      },
+      {
+        img: "/data/Old Officers/Jullie Temporosa - Head of Creatives.webp",
+        name: "Jullie Temporosa",
+        title: "Head of Creatives",
+        subtitle: "Led the creative team and visual direction.",
+        facebook: "https://www.facebook.com/missanningg",
+        linkedin: "https://www.linkedin.com/in/jullie-anne-temporosa-5052a933b/",
+      },
+      {
+        img: "/data/Old Officers/Alyssa Marie Valera - Graphic Designer.webp",
+        name: "Alyssa Marie Valera",
+        title: "Graphic Designer",
+        subtitle: "Designed visual content for marketing and promotions.",
+        facebook: "https://www.facebook.com/marie.sy.35977897",
+        linkedin: "https://www.linkedin.com/in/alyssa-valera-1553352b3/",
+      },
+      {
+        img: "/data/Old Officers/Andrew Velandrez - Graphic Designer.webp",
+        name: "Andrew Velandrez",
+        title: "Graphic Designer",
+        subtitle: "Designed visual content for marketing and promotions.",
+        facebook: "https://www.facebook.com/neilandrewvelandrez",
+        linkedin: "https://www.linkedin.com/in/andrewvelandrez/",
+      },
+      {
+        img: "/data/Old Officers/Allianna Faith Palmiery - Graphic Artist.webp",
+        name: "Allianna Faith Palmiery",
+        title: "Graphic Artist",
+        subtitle: "Created digital illustrations and graphic artwork.",
+        facebook: "https://www.facebook.com/yanapalmiery",
+        linkedin: "https://www.linkedin.com/in/alliana-faith-palmiery-98401b3b5/",
+      },
+      {
+        img: "/data/Old Officers/Rain Jade De Castro - Support Staff.webp",
+        name: "Rain Jade De Castro",
+        title: "Support Staff",
+        subtitle: "Provided operational and logistical support.",
+        facebook: "https://www.facebook.com/rainjade.decastro",
+        linkedin: "https://www.linkedin.com/in/rain-jade-de-castro-6bba75339/",
+      },
+      {
+        img: "/data/Old Officers/Carl Angelo Hernandez - Logistic Coordinator.webp",
+        name: "Carl Angelo Hernandez",
+        title: "Logistics Coordinator",
+        subtitle: "Managed logistics, resources, and event needs.",
+        facebook: "https://www.facebook.com/carlangelo.hernandez",
+        linkedin: "https://www.linkedin.com/in/carl-angelo-hernandez-056106394/",
+      },
+      {
+        img: "/data/Old Officers/Ram Andrei Manalo - Multimedia Specialist.webp",
+        name: "Ram Andrei Manalo",
+        title: "Multimedia Specialist",
+        subtitle: "Created video, audio, and multimedia content.",
+        facebook: "https://www.facebook.com/ramandreii",
+        linkedin: "https://www.linkedin.com/in/ramandreimanalo/",
+      },
+    ],
+  },
+];

@@ -2,9 +2,11 @@ import Header from "@/component/Header"
 import Hero from "@/component/Hero"
 import Team from "@/component/Team"
 import About from "@/component/About"
+import WhatWeOffer from "@/component/WhatWeOffer"
 import Contact from "@/component/Contact"
 import Event from "@/component/Event"
 import UpcomingEvent from "@/component/UpcomingEvent"
+import CometShower from "@/component/UI/CometShower"
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -19,14 +21,15 @@ export const metadata: Metadata = {
 const Page = () => {
   return (
     <div className="flex flex-col gap-8">
+      <CometShower />
       <Header />
       <Hero />
       <About />
-      <Contact />
+      <WhatWeOffer />
       <Event />
       <UpcomingEvent />
       <Team />
-
+      <Contact />
     </div>
   )
 }

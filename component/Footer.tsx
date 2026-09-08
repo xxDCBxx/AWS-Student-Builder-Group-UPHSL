@@ -20,10 +20,10 @@ const Footer = () => {
           <div className='col-span-2 md:col-span-2'>
             <Link href='/' className='flex items-center mb-2 hover:opacity-80 transition-opacity'>
               <Image src='/awssbg logo.png' alt='AWS Student Builder Group' width={24} height={24} />
-              <span className='ml-2 text-base font-bold'>AWS Student Builder Group</span>
+              <span className='ml-2 text-base font-bold font-tektur tracking-wide'>AWS Student Builder Group</span>
             </Link>
-            <p className='text-gray-400 text-xs mb-3'>
-              UPHSL's community for cloud computing growth and AWS learning.
+            <p className='font-tektur text-gray-400 text-xs mb-3'>
+              UPHSL&apos;s community for cloud computing growth and AWS learning.
             </p>
             <div className='flex space-x-3'>
               <a href='https://www.facebook.com/awslearningclub' target='_blank' rel='noopener noreferrer' className='text-gray-400 hover:text-[#ffa23f] transition-colors'>
@@ -39,28 +39,28 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className='text-sm font-semibold mb-2 text-[#ffa23f]'>Quick Links</h3>
+            <h3 className='font-tektur text-sm font-semibold mb-2 text-[#ffa23f] tracking-widest'>Quick Links</h3>
             <ul className='space-y-1 text-xs'>
               <li>
-                <Link href='/verify' className='flex items-center gap-2 text-gray-400 hover:text-white transition-colors'>
+                <Link href='/verify' className='flex items-center gap-2 font-tektur text-gray-400 hover:text-white transition-colors'>
                   <FaCheckCircle className='h-3 w-3 text-[#ffa23f]' />
                   <span>Verify</span>
                 </Link>
               </li>
               <li>
-                <Link href='/membership' className='flex items-center gap-2 text-gray-400 hover:text-white transition-colors'>
+                <Link href='/membership' className='flex items-center gap-2 font-tektur text-gray-400 hover:text-white transition-colors'>
                   <FaUserPlus className='h-3 w-3 text-[#ffa23f]' />
                   <span>Membership</span>
                 </Link>
               </li>
               <li>
-                <Link href='/privacy-policy' className='flex items-center gap-2 text-gray-400 hover:text-white transition-colors'>
+                <Link href='/privacy-policy' className='flex items-center gap-2 font-tektur text-gray-400 hover:text-white transition-colors'>
                   <FaShieldAlt className='h-3 w-3 text-[#ffa23f]' />
                   <span>Privacy Policy</span>
                 </Link>
               </li>
               <li>
-                <Link href='/code-of-conduct' className='flex items-center gap-2 text-gray-400 hover:text-white transition-colors'>
+                <Link href='/code-of-conduct' className='flex items-center gap-2 font-tektur text-gray-400 hover:text-white transition-colors'>
                   <FaFileAlt className='h-3 w-3 text-[#ffa23f]' />
                   <span>Code of Conduct</span>
                 </Link>
@@ -69,17 +69,17 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className='text-sm font-semibold mb-2 text-[#ffa23f]'>Contact</h3>
+            <h3 className='font-tektur text-sm font-semibold mb-2 text-[#ffa23f] tracking-widest'>Contact</h3>
             <div className='space-y-1 text-xs'>
-              <a href='mailto:awslc.uphsl@gmail.com' className='flex items-center text-gray-400 hover:text-white transition-colors'>
+              <a href='mailto:awslc.uphsl@gmail.com' className='flex items-center font-tektur text-gray-400 hover:text-white transition-colors'>
                 <FaEnvelope className='h-3 w-3 mr-2 text-[#ffa23f]' />
                 <span>awslc.uphsl@gmail.com</span>
               </a>
-              <a href='tel:+639936628701' className='flex items-center text-gray-400 hover:text-white transition-colors'>
+              <a href='tel:+639936628701' className='flex items-center font-tektur text-gray-400 hover:text-white transition-colors'>
                 <FaPhone className='h-3 w-3 mr-2 text-[#ffa23f]' />
                 <span>+639936628701</span>
               </a>
-              <a href='https://maps.google.com/?q=College+of+Computer+Studies+UPHSL+Biñan' target='_blank' rel='noopener noreferrer' className='flex items-center text-gray-400 hover:text-white transition-colors'>
+              <a href='https://maps.google.com/?q=College+of+Computer+Studies+UPHSL+Biñan' target='_blank' rel='noopener noreferrer' className='flex items-center font-tektur text-gray-400 hover:text-white transition-colors'>
                 <FaMapMarkerAlt className='h-3 w-3 mr-2 text-[#ffa23f]' />
                 <span>CCS - UPHSL, Biñan</span>
               </a>
@@ -88,7 +88,7 @@ const Footer = () => {
         </div>
 
         <div className='border-t border-[#ffa23f]/30 mt-4 pt-4 text-center text-xs'>
-          <p className='text-gray-500'>
+          <p className='font-tektur text-gray-500'>
             © 2026 AWS Student Builder Group - UPHSL. All rights reserved.
           </p>
         </div>

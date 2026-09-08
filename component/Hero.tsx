@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/component/UI/Button";
-import Image from "next/image";
+import SlideShow from "@/component/Hero/SlideShow";
 import { useRouter } from "next/navigation"
 
 const Hero = () => {
@@ -9,8 +9,9 @@ const Hero = () => {
 
   return (
     <>
+      {/* mobile spacer for fixed header */}
       <div className="flex h-[70px] md:hidden"/>
-      <div className='md:h-screen md:max-h-[600px] mx-auto grid md:grid-cols-2 items-center gap-12 lg:gap-16 px-4 py-8 md:py-0 max-w-7xl'>
+      <div className="md:min-h-[calc(100vh-70px)] md:max-h-[800px] mx-auto grid md:grid-cols-2 items-center gap-12 lg:gap-16 px-4 py-12 md:py-0 max-w-7xl w-full">
         <main className='flex flex-col text-white gap-4 md:gap-6'>
           <h1 className='font-tektur text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-bold tracking-wide leading-tight'>
             AWS STUDENT<br/>BUILDER GROUP
@@ -22,17 +23,11 @@ const Hero = () => {
           </div>
         </main>
 
-        {/* right: "It's always day one!" + sky/cloud panel */}
+        {/* right: auto-advancing slideshow */}
         <div className="w-full flex flex-col justify-center items-center gap-4">
           <h2 className="w-full max-w-2xl text-right font-tektur text-lg sm:text-xl text-white">It&apos;s always day one!</h2>
-          <div className="relative w-full max-w-2xl aspect-[16/11] overflow-hidden rounded-xl aura-maroon-img">
-            <Image
-              src="/workshop.jpg"
-              alt="AWS Student Builder Group Workshop"
-              fill
-              className="object-cover"
-              priority
-            />
+          <div className="w-full max-w-2xl aura-maroon-img rounded-xl overflow-hidden">
+            <SlideShow />
           </div>
         </div>
       </div>

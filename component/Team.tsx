@@ -1,110 +1,267 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
+import { FaFacebook, FaLinkedin } from "react-icons/fa";
 import ArrowLeft from "@/component/UI/ArrowLeft";
 import ArrowRight from "@/component/UI/ArrowRight";
+import { teamYears } from "@/data/team";
 
-const members = [
-  { name: "Marc Angelo Casugbo", role: "President", img: "/data/New Officers/Marc Angelo Casugbo - President.png" },
-  { name: "Rain Jade De Castro", role: "Vice President", img: "/data/New Officers/Rain Jade De Castro - Vice President.webp" },
-  { name: "Zain Raza Khan", role: "Head of Operations (HO)", img: "/data/New Officers/Zain Raza Khan - Head of Operations (HO).png" },
-  { name: "Trisha Biglete", role: "Head of Relations and Community Outreach (HRC)", img: "/data/New Officers/Trisha Biglete - Head of Relations and Community Outreach (HRC).png" },
-  { name: "Alyssa Marie Valera", role: "Head of Marketing and Multimedia (HMM)", img: "/data/New Officers/Alyssa Marie Valera - Head of Marketing and Multimedia (HMM).png" },
-  { name: "Gil Ashley Bien", role: "Executive Secretary", img: "/data/New Officers/Gil Ashley Bien - Executive Secretary.png" },
-  { name: "Auxi Nicole Pongos", role: "Associate Secretary", img: "/data/New Officers/Auxi Nicole Pongos - Associate Secretary.png" },
-  { name: "Yzabel Claurie Nett Mallari", role: "Treasurer", img: "/data/New Officers/Yzabel Claurie Nett Mallari - Treasurer.png" },
-  { name: "Claurenz Mallari", role: "Auditor", img: "/data/New Officers/Claurenz Mallari - Auditor.png" },
-  { name: "Allyza Shamel Hernandez", role: "Internal Relation Officer", img: "/data/New Officers/Allyza Shamel Hernandez - Internal Relation Officer.png" },
-  { name: "Don Santiago Sigue", role: "External Relation Officer", img: "/data/New Officers/Don Santiago Sigue - External Relation Officer.png" },
-  { name: "Irish Nicole Montañez", role: "Communications Manager", img: "/data/New Officers/Irish Nicole Montañez Communications Manager.png" },
-  { name: "Angela Shayne Montañez", role: "Social Media Marketing Manager", img: "/data/New Officers/Angela Shayne Montañez - Social Media Marketing Manager.png" },
-  { name: "Jedidiah Barcelona", role: "Content Manager", img: "/data/New Officers/Jedidiah Barcelona - Content Manager.png" },
-  { name: "Jasmine Fae Dictado", role: "Multimedia Specialist", img: "/data/New Officers/Jasmine Fae Dictado - Multimedia Specialist.png" },
-  { name: "Kylle Vincent Amondina", role: "Video Editor", img: "/data/New Officers/Kylle Vincent Amondina - Video Editor.png" },
-  { name: "Lucky Angel Guevarra", role: "Community Manager", img: "/data/New Officers/Lucky Angel Guevarra - Community Manager.png" },
-  { name: "Norven Zaldy Carandang", role: "Logistics Coordinator", img: "/data/New Officers/Norven Zaldy Carandang -Logistics Coordinator.png" },
-  { name: "Christopher James Nuqui", role: "Web Development Specialist", img: "/data/New Officers/Christopher James Nuqui - Web Development Specialist.png" },
-  { name: "Alliana Faith Palmiery", role: "Support Staff", img: "/data/New Officers/Alliana Faith Palmiery - Support Staff.png" },
-  { name: "Zyrus Alvez", role: "Consultant", img: "/data/New Officers/Zyrus Alvez - Consultant.png" },
-];
+const CARD_W     = 180;
+const CARD_GAP   = 20;
+const CARD_STEP  = CARD_W + CARD_GAP;
+const PX_PER_SEC = 40;
+const STEP_SPEED = CARD_STEP / 0.42; // one card in ~420ms
+const PAUSE_MS   = 5000;
 
-const PAGE_SIZE = 5;
-const totalPages = Math.ceil(members.length / PAGE_SIZE);
+// How many cards to render on each side of the visible area.
+// This is the ONLY source of truth for which cards appear — derived
+// from domOff during render, never stored in a separate state.
+const BUFFER = 20;
+
+function mod(n: number, len: number) {
+  return ((n % len) + len) % len;
+}
 
 const Team: React.FC = () => {
-  const [page, setPage] = useState(0);
+  const [yearIndex, setYearIndex]       = useState(0);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [paused, setPaused]             = useState(false);
+  // domOff is the ONLY scroll state — everything else is derived from it
+  const [domOff, setDomOff]             = useState(0);
 
-  const prev = () => setPage((p) => Math.max(0, p - 1));
-  const next = () => setPage((p) => Math.min(totalPages - 1, p + 1));
+  const selectedYear = teamYears[yearIndex];
+  const members      = selectedYear.members;
+  const count        = members.length;
 
-  const visible = members.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE);
+  // All mutable scroll bookkeeping in refs
+  const domOffRef     = useRef(0);
+  const pausedRef     = useRef(false);
+  const steppingRef   = useRef(false);
+  const stepRemRef    = useRef(0);
+  const lastTimeRef   = useRef<number | null>(null);
+  const rafRef        = useRef<number | null>(null);
+  const pauseTimer    = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  pausedRef.current = paused;
+
+  // ── Derive the visible card strip directly from domOff ──────────────────
+  //
+  // domOff is a pixel offset that grows (more negative = scrolled further left).
+  // We figure out which logical card index sits at the left edge of the viewport,
+  // then render BUFFER cards to the left of that and BUFFER to the right.
+  //
+  // No separate window state — so offset and content are always in sync.
+  const getStrip = (off: number) => {
+    // which card index is at pixel 0 of the scrolling row?
+    // off is negative; -off / CARD_STEP gives how many cards we've scrolled past
+    const leftCard  = Math.floor(-off / CARD_STEP) - BUFFER;
+    const total     = BUFFER * 2 + 10; // a bit of extra padding
+    return Array.from({ length: total }, (_, i) => {
+      const logical = leftCard + i;
+      return {
+        logical,
+        member: members[mod(logical, count)],
+        x: logical * CARD_STEP + off,  // pixel position relative to viewport left
+      };
+    });
+  };
+
+  // ── rAF loop ─────────────────────────────────────────────────────────────
+  const tick = useCallback((time: number) => {
+    if (lastTimeRef.current === null) lastTimeRef.current = time;
+    const delta = Math.min(time - lastTimeRef.current, 50);
+    lastTimeRef.current = time;
+
+    let off = domOffRef.current;
+
+    if (steppingRef.current) {
+      const maxMove = (STEP_SPEED * delta) / 1000;
+      const rem     = stepRemRef.current;
+      const move    = Math.abs(rem) <= maxMove ? rem : Math.sign(rem) * maxMove;
+      off += move;
+      stepRemRef.current -= move;
+
+      if (Math.abs(stepRemRef.current) < 0.5) {
+        // Snap to exact card boundary — no rounding error
+        off = Math.round(off / CARD_STEP) * CARD_STEP;
+        stepRemRef.current = 0;
+        steppingRef.current = false;
+        if (pauseTimer.current) clearTimeout(pauseTimer.current);
+        pauseTimer.current = setTimeout(() => setPaused(false), PAUSE_MS);
+      }
+    } else if (!pausedRef.current) {
+      off -= (PX_PER_SEC * delta) / 1000;
+    }
+
+    // Keep offset bounded — when we've drifted a full set to the left,
+    // silently jump right by one set. Because domOff mod (count*CARD_STEP)
+    // is preserved, the visible cards are identical before and after.
+    const setW = count * CARD_STEP;
+    while (off <= -(setW * 2)) off += setW;
+    while (off > 0)            off -= setW;
+
+    domOffRef.current = off;
+    setDomOff(off);
+
+    rafRef.current = requestAnimationFrame(tick);
+  }, [count]);
+
+  useEffect(() => {
+    rafRef.current = requestAnimationFrame(tick);
+    return () => { if (rafRef.current !== null) cancelAnimationFrame(rafRef.current); };
+  }, [tick]);
+
+  // Reset on year change
+  useEffect(() => {
+    domOffRef.current   = 0;
+    steppingRef.current = false;
+    stepRemRef.current  = 0;
+    lastTimeRef.current = null;
+    setDomOff(0);
+    setPaused(false);
+  }, [yearIndex]);
+
+  // Arrow — only when not mid-step
+  const handleArrow = useCallback((direction: "prev" | "next") => {
+    if (steppingRef.current) return;
+    if (pauseTimer.current) clearTimeout(pauseTimer.current);
+    setPaused(true);
+    stepRemRef.current  = direction === "prev" ? CARD_STEP : -CARD_STEP;
+    steppingRef.current = true;
+  }, []);
+
+  const handleYearChange = (i: number) => {
+    setYearIndex(i);
+    setDropdownOpen(false);
+  };
+
+  // Derive the strip from current domOff — always in sync, no separate state
+  const strip = getStrip(domOff);
 
   return (
-    <div id="team" className="relative flex flex-col gap-8 px-4 sm:px-6 lg:px-8 py-12 scroll-mt-[70px] overflow-hidden">
-      {/* comet */}
-      <div className="pointer-events-none absolute top-8 right-10 hidden md:block">
-        <div className="animate-comet">
-          <svg width="220" height="90" viewBox="0 0 220 90" fill="none">
-            <defs>
-              <linearGradient id="cometTail" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stopColor="rgba(192,38,211,0)" />
-                <stop offset="100%" stopColor="rgba(192,38,211,0.9)" />
-              </linearGradient>
-            </defs>
-            <path d="M0,70 L180,20" stroke="url(#cometTail)" strokeWidth="6" strokeLinecap="round" />
-            <path d="M20,78 L180,20" stroke="url(#cometTail)" strokeWidth="3" strokeLinecap="round" opacity="0.6" />
-            <circle cx="188" cy="18" r="10" fill="#ffd28a" />
-            <circle cx="188" cy="18" r="16" fill="rgba(255,180,90,0.35)" />
-          </svg>
-        </div>
-      </div>
-
+    <div id="team" className="relative flex flex-col gap-6 px-4 sm:px-6 lg:px-8 py-12 scroll-mt-[70px]">
       <div className="max-w-7xl mx-auto w-full">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-medium text-white mb-10">Meet Our Team</h1>
 
-        <div className="flex items-center gap-4">
-          {/* left arrow */}
+        {/* Header + year dropdown */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+          <h1 className="font-tektur text-3xl sm:text-4xl md:text-5xl font-medium text-white tracking-wide">
+            Meet Our Team
+          </h1>
+
+          <div className="relative self-start sm:self-auto">
+            <button
+              onClick={() => setDropdownOpen((o) => !o)}
+              className="flex items-center gap-3 font-tektur text-sm tracking-widest text-white border border-[#ffa23f]/60 rounded-full px-5 py-2 bg-black/30 backdrop-blur-sm hover:border-[#ffa23f] hover:bg-[#ffa23f]/10 transition-all duration-200"
+              aria-haspopup="listbox"
+              aria-expanded={dropdownOpen}
+            >
+              <span>{selectedYear.label}</span>
+              <svg
+                className={`w-3 h-3 text-[#ffa23f] transition-transform duration-200 ${dropdownOpen ? "rotate-180" : ""}`}
+                fill="none" viewBox="0 0 10 6" stroke="currentColor" strokeWidth="2"
+              >
+                <path d="M1 1l4 4 4-4" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+
+            {dropdownOpen && (
+              <ul role="listbox" className="absolute right-0 mt-2 min-w-full bg-[#1a0a2e] border border-[#ffa23f]/40 rounded-xl overflow-hidden z-20 shadow-xl">
+                {teamYears.map((y, i) => (
+                  <li key={y.year}>
+                    <button
+                      role="option"
+                      aria-selected={i === yearIndex}
+                      onClick={() => handleYearChange(i)}
+                      className={`w-full text-left font-tektur text-sm tracking-widest px-5 py-3 transition-colors duration-150
+                        ${i === yearIndex ? "text-[#ffa23f] bg-[#ffa23f]/10" : "text-white/80 hover:text-white hover:bg-white/5"}`}
+                    >
+                      {y.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+
+        {/* Conveyor belt */}
+        <div className="flex items-center gap-3 sm:gap-4">
           <div className="flex-shrink-0">
-            <ArrowLeft onClick={prev} />
+            <ArrowLeft onClick={() => handleArrow("prev")} />
           </div>
 
-          {/* 5-column grid */}
-          <div className="flex-1 grid grid-cols-5 gap-4">
-            {visible.map((member) => (
-              <div key={member.name} className="flex flex-col text-white">
-                <div className="relative aspect-square rounded-2xl overflow-hidden aura-maroon mb-3">
+          {/* Viewport — uses relative positioning; cards are absolutely placed */}
+          <div className="flex-1 overflow-hidden relative" style={{ height: CARD_W + 80 }}>
+            <div className="pointer-events-none absolute left-0 top-0 h-full w-16 z-10"
+              style={{ background: "linear-gradient(to right, #050208, transparent)" }} />
+            <div className="pointer-events-none absolute right-0 top-0 h-full w-16 z-10"
+              style={{ background: "linear-gradient(to left, #050208, transparent)" }} />
+
+            {strip.map(({ logical, member, x }) => (
+              <div
+                key={logical}
+                className="absolute top-0 flex flex-col text-white"
+                style={{ left: x, width: CARD_W }}
+              >
+                <div
+                  className="relative rounded-2xl overflow-hidden aura-maroon mb-3"
+                  style={{ width: CARD_W, height: CARD_W }}
+                >
                   <Image
                     src={member.img}
                     alt={member.name}
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
+                    sizes={`${CARD_W}px`}
                   />
                 </div>
-                <h2 className="font-tektur font-bold text-xs sm:text-sm leading-snug">{member.name}</h2>
-                <p className="font-tektur text-xs text-white/70 mt-1 leading-snug">{member.role}</p>
+                <p className="font-tektur text-xs tracking-widest text-[#ffa23f] uppercase mb-0.5 leading-tight truncate">
+                  {member.title}
+                </p>
+                <h2 className="font-tektur font-bold text-sm leading-snug line-clamp-2 mb-1">
+                  {member.name}
+                </h2>
+                {(member.facebook || member.linkedin) && (
+                  <div className="flex gap-2 mt-0.5">
+                    {member.facebook && (
+                      <a
+                        href={member.facebook}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white/50 hover:text-[#ffa23f] transition-colors duration-150"
+                        aria-label={`${member.name} Facebook`}
+                      >
+                        <FaFacebook size={14} />
+                      </a>
+                    )}
+                    {member.linkedin && (
+                      <a
+                        href={member.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white/50 hover:text-[#ffa23f] transition-colors duration-150"
+                        aria-label={`${member.name} LinkedIn`}
+                      >
+                        <FaLinkedin size={14} />
+                      </a>
+                    )}
+                  </div>
+                )}
               </div>
             ))}
           </div>
 
-          {/* right arrow */}
           <div className="flex-shrink-0">
-            <ArrowRight onClick={next} />
+            <ArrowRight onClick={() => handleArrow("next")} />
           </div>
         </div>
 
-        {/* page dots */}
-        <div className="flex justify-center gap-2 mt-8">
-          {Array.from({ length: totalPages }).map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setPage(i)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                i === page ? "bg-purple-400 scale-125" : "bg-white/30"
-              }`}
-            />
-          ))}
-        </div>
+        {paused && (
+          <p className="font-tektur text-xs text-white/35 text-center mt-3 tracking-widest">
+            resuming shortly...
+          </p>
+        )}
       </div>
     </div>
   );

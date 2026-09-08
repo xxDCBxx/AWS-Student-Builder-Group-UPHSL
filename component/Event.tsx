@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import Title from "@/component/Event/Title"
 import ImageFrame from "@/component/Event/ImageFrame"
 import ArrowLeft from "@/component/UI/ArrowLeft"
@@ -10,9 +10,31 @@ import { events } from "@/data/event"
 
 const Event = () => {
   const [current, setCurrent] = useState(0)
+  const [visible, setVisible] = useState(true)   // drives opacity for crossfade
+  const pendingRef = useRef<number | null>(null)  // next index waiting to show
 
-  const prev = () => setCurrent((c) => Math.max(0, c - 1))
-  const next = () => setCurrent((c) => Math.min(events.length - 1, c + 1))
+  const FADE_MS = 220
+
+  const goTo = (next: number) => {
+    // Fade out, swap content, fade back in
+    setVisible(false)
+    pendingRef.current = next
+  }
+
+  const prev = () => goTo((current - 1 + events.length) % events.length)
+  const next = () => goTo((current + 1) % events.length)
+
+  // When we fade out, wait for the transition then swap + fade in
+  useEffect(() => {
+    if (!visible && pendingRef.current !== null) {
+      const t = setTimeout(() => {
+        setCurrent(pendingRef.current!)
+        pendingRef.current = null
+        setVisible(true)
+      }, FADE_MS)
+      return () => clearTimeout(t)
+    }
+  }, [visible])
 
   const event = events[current]
 
@@ -26,7 +48,14 @@ const Event = () => {
             <ArrowLeft onClick={prev} />
           </div>
 
-          <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          {/* Fading content area */}
+          <div
+            className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"
+            style={{
+              opacity: visible ? 1 : 0,
+              transition: `opacity ${FADE_MS}ms ease-in-out`,
+            }}
+          >
             {/* left: event images */}
             <div className="order-1">
               <ImageFrame image_path={event.pictures} />
@@ -34,12 +63,14 @@ const Event = () => {
 
             {/* right: text */}
             <div className="space-y-4 order-2">
-              <p className="font-tektur text-xs text-[#ffa23f] uppercase tracking-widest">{event.type}</p>
+              <p className="font-tektur text-xs sm:text-sm text-[#ffa23f] uppercase tracking-widest">{event.type}</p>
               <h2 className="font-tektur text-xl sm:text-2xl font-bold text-white">
                 {event.title}
               </h2>
-              <p className="font-tektur text-xs text-white/60">{event.date}{event.location ? ` · ${event.location}` : ""}</p>
-              <p className="font-tektur text-sm text-white/90 leading-relaxed">
+              <p className="font-tektur text-xs sm:text-sm text-white/60">
+                {event.date}{event.location ? ` · ${event.location}` : ""}
+              </p>
+              <p className="font-tektur text-sm sm:text-base text-white/90 leading-relaxed">
                 {event.subtitle}
               </p>
             </div>
@@ -61,7 +92,7 @@ const Event = () => {
           <Pagination
             count={events.length}
             currentPage={current}
-            onPageChange={setCurrent}
+            onPageChange={(i) => goTo(i)}
           />
         </div>
       </div>

@@ -55,7 +55,7 @@ body::after {
 }
 
 .font-tektur{
-  font-family: 'Tektur', 'Arial';
+  font-family: 'Tektur', sans-serif;
 }
 
 @keyframes scroll {
@@ -122,15 +122,9 @@ body::after {
   animation: twinkle 3s ease-in-out infinite;
 }
 
-/* mockup: comet streak across the team section */
-@keyframes cometFly {
-  0% { transform: translate(0, 0) rotate(-25deg); opacity: 0; }
-  15% { opacity: 1; }
-  85% { opacity: 1; }
-  100% { transform: translate(-160px, 90px) rotate(-25deg); opacity: 0; }
-}
+/* comet animations are handled inline by CometShower component */
 .animate-comet {
-  animation: cometFly 6s ease-in-out infinite;
+  animation: none;
 }
 
 /* mockup: purple pill buttons */

@@ -35,7 +35,7 @@ const UpcomingEvent = () => {
   return (
     <div id="upcoming" className="py-12 px-4 sm:px-6 lg:px-8 scroll-mt-[70px]">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-medium text-white mb-6">UPCOMING EVENTS</h1>
+        <h1 className="font-tektur text-3xl sm:text-4xl md:text-5xl font-medium text-white mb-6 tracking-wide">UPCOMING EVENTS</h1>
 
         <button className="pill-purple aura-maroon-btn font-tektur tracking-widest text-white rounded-full py-2 px-5 text-sm mb-10">
           WORK WITH US
@@ -55,24 +55,24 @@ const UpcomingEvent = () => {
                 {/* type badge */}
                 <div className="flex items-center gap-2">
                   <span className="text-base">{typeIcon[event.type] ?? "📅"}</span>
-                  <span className="font-tektur tracking-widest text-xs text-white/70 uppercase">{event.type}</span>
+                  <span className="font-tektur tracking-widest text-xs sm:text-sm text-white/70 uppercase">{event.type}</span>
                 </div>
 
                 {/* title */}
-                <h2 className="font-tektur font-bold text-lg text-white leading-snug">{event.title}</h2>
+                <h2 className="font-tektur font-bold text-xl sm:text-2xl text-white leading-snug">{event.title}</h2>
 
                 {/* description */}
-                <p className="font-tektur text-xs text-white/80 leading-relaxed">{event.description}</p>
+                <p className="font-tektur text-sm sm:text-base text-white/80 leading-relaxed">{event.description}</p>
 
                 {/* meta */}
                 <div className="flex flex-col gap-1 mt-auto pt-4 border-t border-white/10">
-                  <div className="flex items-center gap-2 font-tektur text-xs text-white/70">
+                  <div className="flex items-center gap-2 font-tektur text-xs sm:text-sm text-white/70">
                     <span>📅</span><span>{event.date}</span>
                   </div>
-                  <div className="flex items-center gap-2 font-tektur text-xs text-white/70">
+                  <div className="flex items-center gap-2 font-tektur text-xs sm:text-sm text-white/70">
                     <span>🕐</span><span>{event.time}</span>
                   </div>
-                  <div className="flex items-center gap-2 font-tektur text-xs text-white/70">
+                  <div className="flex items-center gap-2 font-tektur text-xs sm:text-sm text-white/70">
                     <span>📍</span><span>{event.location}</span>
                   </div>
                 </div>

@@ -143,7 +143,7 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
       {"@type": "Person", "name": "Ram Andrei Manalo", "jobTitle": "Multimedia Specialist"}
     ],
     "sameAs": [
-      "https://www.facebook.com/awscloudclub"
+      "https://www.facebook.com/awssbg"
     ]
   };
 

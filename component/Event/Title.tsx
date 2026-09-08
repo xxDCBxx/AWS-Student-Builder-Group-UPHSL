@@ -4,12 +4,12 @@ const Title = () => {
 
       <div className="flex gap-x-2 sm:gap-x-3 w-full items-center max-w-6xl">
         <div className="border border-[#ffa23f] flex-1"/>
-          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center sm:whitespace-nowrap">
+          <h1 className="font-tektur text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center sm:whitespace-nowrap">
             Major <span className="text-[#ffa23f]">Events</span> & <span className="text-[#ffa23f]">Community</span> Participation
           </h1>  
         <div className="border border-[#ffa23f] flex-1"/>
       </div>
-      <h2 className="text-center max-w-[800px] text-xs sm:text-sm md:text-base lg:text-lg px-2">
+      <h2 className="font-tektur text-center max-w-[800px] text-sm sm:text-base md:text-lg px-2 text-white/80">
         Some of our hosted events and community participation where we're invited to share knowledge and connect with fellow tech enthusiasts
       </h2>
     </div>
