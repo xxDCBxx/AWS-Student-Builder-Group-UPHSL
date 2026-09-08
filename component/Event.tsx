@@ -7,6 +7,14 @@ import ArrowLeft from "@/component/UI/ArrowLeft"
 import ArrowRight from "@/component/UI/ArrowRight"
 import Pagination from "@/component/UI/Pagination"
 import { events } from "@/data/event"
+import { EventType } from "@/component/UpcomingEvent/Card"
+
+const typeIcon: Record<EventType, string> = {
+  [EventType.SEMINAR]: "🎙️",
+  [EventType.WORKSHOP]: "🔧",
+  [EventType.COMPETITION]: "🏆",
+  [EventType.COMMUNITY]: "🤝",
+}
 
 const Event = () => {
   const [current, setCurrent] = useState(0)
@@ -63,7 +71,10 @@ const Event = () => {
 
             {/* right: text */}
             <div className="space-y-4 order-2">
-              <p className="font-tektur text-xs sm:text-sm text-[#ffa23f] uppercase tracking-widest">{event.type}</p>
+              <div className="flex items-center gap-2">
+                <span className="text-base">{typeIcon[event.type] ?? "📅"}</span>
+                <p className="font-tektur text-xs sm:text-sm text-[#ffa23f] uppercase tracking-widest">{event.type}</p>
+              </div>
               <h2 className="font-tektur text-xl sm:text-2xl font-bold text-white">
                 {event.title}
               </h2>

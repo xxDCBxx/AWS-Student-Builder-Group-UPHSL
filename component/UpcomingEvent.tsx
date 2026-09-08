@@ -2,31 +2,14 @@
 
 import ArrowLeft from "@/component/UI/ArrowLeft"
 import ArrowRight from "@/component/UI/ArrowRight"
+import { upcomingEvents } from "@/data/upcomingEvent"
+import { EventType } from "@/component/UpcomingEvent/Card"
 
-const upcomingEvents = [
-  {
-    type: "SEMINAR",
-    title: "TechTuhan (Reworked)",
-    description:
-      "A dynamic, media-driven interactive session designed to inspire students through the shared career journeys and insights of guest speakers. Taking inspiration from the popular podcast format, the session blends technical communication with entertainment (\"infotainment\")—featuring debates on trending tech discussions from Reddit and LinkedIn, deep dives into new AWS technologies, and exclusive reveals of puzzle solutions from the \"Build with Awie!\" games.",
-    date: "Monthly, Starting September 2026",
-    time: "TBA",
-    location: "AWS Student Builder Group - UPHSL Discord Server",
-  },
-  {
-    type: "WORKSHOP",
-    title: "Data Analytics and Machine Learning Workshop with AWS",
-    description:
-      "A hands-on, month-long workshop designed to introduce students to the fundamentals of data analytics and machine learning. Under the guidance of experienced mentors, participants will master data analysis techniques, familiarize themselves with core platform interfaces, and complete guided exercises to gain practical experience in data visualization and predictive modeling.",
-    date: "February 2027",
-    time: "TBA",
-    location: "Macintosh Laboratory, UPHSL",
-  },
-]
-
-const typeIcon: Record<string, string> = {
-  SEMINAR: "🎙️",
-  WORKSHOP: "🔧",
+const typeIcon: Record<EventType, string> = {
+  [EventType.SEMINAR]: "🎙️",
+  [EventType.WORKSHOP]: "🔧",
+  [EventType.COMPETITION]: "🏆",
+  [EventType.COMMUNITY]: "🤝",
 }
 
 const UpcomingEvent = () => {
@@ -62,7 +45,7 @@ const UpcomingEvent = () => {
                 <h2 className="font-tektur font-bold text-xl sm:text-2xl text-white leading-snug">{event.title}</h2>
 
                 {/* description */}
-                <p className="font-tektur text-sm sm:text-base text-white/80 leading-relaxed">{event.description}</p>
+                <p className="font-tektur text-sm sm:text-base text-white/80 leading-relaxed">{event.subtitle}</p>
 
                 {/* meta */}
                 <div className="flex flex-col gap-1 mt-auto pt-4 border-t border-white/10">
