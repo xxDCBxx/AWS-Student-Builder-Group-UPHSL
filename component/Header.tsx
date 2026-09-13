@@ -19,20 +19,20 @@ const Header = () => {
 
   return (
     <>
-      <header className='h-[70px] w-full fixed bg-black/20 backdrop-blur-sm z-49 flex items-center px-4 md:px-8 justify-between'>
-        <div className="flex gap-2 md:gap-4 items-center text-white font-extrabold text-lg md:text-xl">
-          <Image src="/awssbg logo.png" alt="AWS Student Builder Group" width={45} height={45} className="md:w-14 md:h-14"/>
+      <header className='h-[70px] w-full fixed bg-gradient-to-b from-[#3a0f2e]/80 to-black/30 backdrop-blur-sm z-49 flex items-center px-4 md:px-8 justify-between border-b border-[#c026d3]/30'>
+        <div className="flex gap-2 md:gap-4 items-center text-white font-extrabold text-lg md:text-xl font-tektur">
+          <Image src="/awssbg logo.png" alt="AWS Student Builder Group" width={45} height={45} className="md:w-14 md:h-14 rounded-full"/>
           <h1>AWS SBG - UPHSL</h1>
         </div>
         
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex gap-4 items-center">
+        <div className="hidden lg:flex gap-6 items-center font-tektur">
           <TextButton onClick={() => scrollToSection('about')}>About Us</TextButton>
           <TextButton onClick={() => scrollToSection('events')}>Events</TextButton>
           <TextButton onClick={() => scrollToSection('upcoming')}>Upcoming</TextButton>
           <TextButton onClick={() => scrollToSection('team')}>The Team</TextButton>
           <TextButton onClick={() => scrollToSection('contact')}>Contact Us</TextButton>
-          <Button onClick={() => router.push("/membership")}>Join Us</Button>
+          <Button variant="purple" className="pill-purple font-tektur tracking-widest" onClick={() => router.push("/membership")}>JOIN US</Button>
         </div>
 
         {/* Burger Menu Button */}
@@ -71,7 +71,7 @@ const Header = () => {
           <TextButton onClick={() => { scrollToSection('upcoming'); setIsMenuOpen(false); }}>Upcoming</TextButton>
           <TextButton onClick={() => { scrollToSection('team'); setIsMenuOpen(false); }}>The Team</TextButton>
           <TextButton onClick={() => { scrollToSection('contact'); setIsMenuOpen(false); }}>Contact Us</TextButton>
-          <Button className="mt-4" onClick={() => { router.push("/membership"); setIsMenuOpen(false); }}>Join Us</Button>
+          <Button variant="purple" className="mt-4 pill-purple font-tektur tracking-widest" onClick={() => { router.push("/membership"); setIsMenuOpen(false); }}>JOIN US</Button>
         </div>
       </div>
     </>
