@@ -1,136 +1,110 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Title from "@/component/Event/Title"
-import ImageFrame from "./Event/ImageFrame"
-import Pagination from "@/component/UI/Pagination"
+import ImageFrame from "@/component/Event/ImageFrame"
 import ArrowLeft from "@/component/UI/ArrowLeft"
 import ArrowRight from "@/component/UI/ArrowRight"
-import { FaCalendarAlt, FaMapMarkerAlt, FaTools, FaChalkboardTeacher, FaTrophy, FaUsers } from 'react-icons/fa'
+import Pagination from "@/component/UI/Pagination"
 import { events } from "@/data/event"
 import { EventType } from "@/component/UpcomingEvent/Card"
 
+const typeIcon: Record<EventType, string> = {
+  [EventType.SEMINAR]: "🎙️",
+  [EventType.WORKSHOP]: "🔧",
+  [EventType.COMPETITION]: "🏆",
+  [EventType.COMMUNITY]: "🤝",
+}
+
 const Event = () => {
-  const [currentIndex, setCurrentIndex] = useState(events.length)
-  const [touchStart, setTouchStart] = useState(0)
-  const [touchEnd, setTouchEnd] = useState(0)
-  const [isTransitioning, setIsTransitioning] = useState(true)
-  const infiniteEvents = [...events, ...events, ...events]
+  const [current, setCurrent] = useState(0)
+  const [visible, setVisible] = useState(true)   // drives opacity for crossfade
+  const pendingRef = useRef<number | null>(null)  // next index waiting to show
 
-  const typeConfig = {
-    [EventType.WORKSHOP]: { color: 'bg-purple-500/20 text-purple-300 border-purple-500', icon: FaTools, label: 'Workshop' },
-    [EventType.SEMINAR]: { color: 'bg-blue-500/20 text-blue-300 border-blue-500', icon: FaChalkboardTeacher, label: 'Seminar' },
-    [EventType.COMPETITION]: { color: 'bg-yellow-500/20 text-yellow-300 border-yellow-500', icon: FaTrophy, label: 'Competition' },
-    [EventType.COMMUNITY]: { color: 'bg-green-500/20 text-green-300 border-green-500', icon: FaUsers, label: 'Community' }
+  const FADE_MS = 220
+
+  const goTo = (next: number) => {
+    // Fade out, swap content, fade back in
+    setVisible(false)
+    pendingRef.current = next
   }
 
-  const handlePrev = () => {
-    setIsTransitioning(true)
-    setCurrentIndex((prev) => prev - 1)
-  }
+  const prev = () => goTo((current - 1 + events.length) % events.length)
+  const next = () => goTo((current + 1) % events.length)
 
-  const handleNext = () => {
-    setIsTransitioning(true)
-    setCurrentIndex((prev) => prev + 1)
-  }
-
+  // When we fade out, wait for the transition then swap + fade in
   useEffect(() => {
-    if (currentIndex === 0) {
-      setTimeout(() => {
-        setIsTransitioning(false)
-        setCurrentIndex(events.length)
-      }, 500)
-    } else if (currentIndex === infiniteEvents.length - events.length) {
-      setTimeout(() => {
-        setIsTransitioning(false)
-        setCurrentIndex(events.length)
-      }, 500)
+    if (!visible && pendingRef.current !== null) {
+      const t = setTimeout(() => {
+        setCurrent(pendingRef.current!)
+        pendingRef.current = null
+        setVisible(true)
+      }, FADE_MS)
+      return () => clearTimeout(t)
     }
-  }, [currentIndex])
+  }, [visible])
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX)
-    setTouchEnd(e.targetTouches[0].clientX)
-  }
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX)
-  }
-
-  const handleTouchEnd = () => {
-    const diff = touchStart - touchEnd
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) handleNext()
-      else handlePrev()
-    }
-  }
-
-  const actualIndex = currentIndex % events.length
+  const event = events[current]
 
   return (
-    <div id="events" className="py-4 px-4 sm:px-6 lg:px-8 scroll-mt-[70px]">
-      <Title />
-      <div className="md:flex items-center gap-4 max-w-7xl mx-auto mt-8">
-        <div className="hidden md:block">
-          <ArrowLeft onClick={handlePrev} />
-        </div>
-        <div className="relative overflow-hidden flex-1">
-          <div 
-            className="flex"
-            style={{ 
-              transform: `translateX(-${currentIndex * 100}%)`,
-              transition: isTransitioning ? 'transform 500ms ease-out' : 'none'
+    <div id="events" className="py-12 px-4 sm:px-6 lg:px-8 scroll-mt-[70px]">
+      <div className="max-w-7xl mx-auto">
+        <Title />
+
+        <div className="flex items-center gap-4 mt-8">
+          <div className="hidden md:block flex-shrink-0">
+            <ArrowLeft onClick={prev} />
+          </div>
+
+          {/* Fading content area */}
+          <div
+            className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"
+            style={{
+              opacity: visible ? 1 : 0,
+              transition: `opacity ${FADE_MS}ms ease-in-out`,
             }}
           >
-            {infiniteEvents.map((event, index) => {
-              const TypeIcon = typeConfig[event.type].icon
-              return (
-              <div key={index} className="min-w-full grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-12">
-                <div 
-                  className="space-y-3 order-2 lg:order-1"
-                  onTouchStart={handleTouchStart}
-                  onTouchMove={handleTouchMove}
-                  onTouchEnd={handleTouchEnd}
-                >
-                  <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full border ${typeConfig[event.type].color} text-xs font-semibold`}>
-                    <TypeIcon className="text-[#ffa23f]" />
-                    <span>{typeConfig[event.type].label}</span>
-                  </div>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-white leading-tight">
-                    {event.title}
-                  </h2>
-                  <div className="flex flex-col gap-1 text-xs sm:text-sm text-gray-300">
-                    <div className="flex items-center gap-2">
-                      <FaCalendarAlt className="text-[#ffa23f]" />
-                      <span>{event.date}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <FaMapMarkerAlt className="text-[#ffa23f]" />
-                      <span>{event.location}</span>
-                    </div>
-                  </div>
-                  <p className="text-sm sm:text-base text-gray-100 leading-relaxed">
-                    {event.subtitle}
-                  </p>
-                </div>
-                <div className="order-1 lg:order-2">
-                  <ImageFrame image_path={event.pictures}/>
-                </div>
+            {/* left: event images */}
+            <div className="order-1">
+              <ImageFrame image_path={event.pictures} />
+            </div>
+
+            {/* right: text */}
+            <div className="space-y-4 order-2">
+              <div className="flex items-center gap-2">
+                <span className="text-base">{typeIcon[event.type] ?? "📅"}</span>
+                <p className="font-tektur text-xs sm:text-sm text-[#ffa23f] uppercase tracking-widest">{event.type}</p>
               </div>
-            )})}
+              <h2 className="font-tektur text-xl sm:text-2xl font-bold text-white">
+                {event.title}
+              </h2>
+              <p className="font-tektur text-xs sm:text-sm text-white/60">
+                {event.date}{event.location ? ` · ${event.location}` : ""}
+              </p>
+              <p className="font-tektur text-sm sm:text-base text-white/90 leading-relaxed">
+                {event.subtitle}
+              </p>
+            </div>
+          </div>
+
+          <div className="hidden md:block flex-shrink-0">
+            <ArrowRight onClick={next} />
           </div>
         </div>
-        <div className="hidden md:block">
-          <ArrowRight onClick={handleNext} />
+
+        {/* mobile arrows */}
+        <div className="flex md:hidden items-center justify-center gap-6 mt-6">
+          <ArrowLeft onClick={prev} />
+          <ArrowRight onClick={next} />
         </div>
-      </div>
-      <div className="flex items-center justify-center gap-6 mt-2 md:mt-6 max-w-7xl mx-auto">
-        <div className="block md:hidden">
-          <ArrowLeft onClick={handlePrev} />
-        </div>
-        <Pagination count={events.length} currentPage={actualIndex} onPageChange={(i) => setCurrentIndex(i + events.length)} />
-        <div className="block md:hidden">
-          <ArrowRight onClick={handleNext} />
+
+        {/* pagination dots */}
+        <div className="flex justify-center mt-6">
+          <Pagination
+            count={events.length}
+            currentPage={current}
+            onPageChange={(i) => goTo(i)}
+          />
         </div>
       </div>
     </div>

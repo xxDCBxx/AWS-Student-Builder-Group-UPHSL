@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/component/UI/Button";
-import SlideShow from "./Hero/SlideShow"
+import SlideShow from "@/component/Hero/SlideShow";
 import { useRouter } from "next/navigation"
 
 const Hero = () => {
@@ -9,20 +9,26 @@ const Hero = () => {
 
   return (
     <>
+      {/* mobile spacer for fixed header */}
       <div className="flex h-[70px] md:hidden"/>
-      <div className='md:h-screen md:max-h-[600px] mx-auto grid md:grid-cols-2 items-center gap-12 lg:gap-16 px-4 py-8 md:py-0 max-w-7xl'>
-        <main className='flex flex-col text-white gap-3 md:gap-4'>
-          <h1 className='text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-bold'><span className='text-[#ffa23f] font-extrabold'>AWS</span> Student <br/>Builder Group</h1>
-          <h2 className='text-sm sm:text-base md:text-base font-bold'>University of Perpetual Help System Laguna - Biñan</h2>
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mt-2">
-            <Button variant="purple" className="w-full sm:w-[200px]" onClick={() => router.push("/membership")}>Join Our Community</Button>
-            <Button variant="orange" className="w-full sm:w-[160px]" onClick={() => router.push("/verify")}>Verify</Button>
+      <div className="md:min-h-[calc(100vh-70px)] md:max-h-[800px] mx-auto grid md:grid-cols-2 items-center gap-12 lg:gap-16 px-4 py-12 md:py-0 max-w-7xl w-full">
+        <main className='flex flex-col text-white gap-4 md:gap-6'>
+          <h1 className='font-tektur text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-bold tracking-wide leading-tight'>
+            AWS STUDENT<br/>BUILDER GROUP
+          </h1>
+          <h2 className='font-tektur text-sm sm:text-base tracking-wide text-white/90'>University of Perpetual Help System Laguna - Biñan</h2>
+          <div className="flex flex-col sm:flex-row gap-4 mt-2">
+            <Button variant="purple" className="pill-purple aura-maroon-btn font-tektur tracking-widest w-full sm:w-[240px] py-3" onClick={() => router.push("/membership")}>JOIN OUR COMMUNITY</Button>
+            <Button variant="purple" className="pill-purple aura-maroon-btn font-tektur tracking-widest w-full sm:w-[160px] py-3" onClick={() => router.push("/verify")}>VERIFY</Button>
           </div>
         </main>
-        {/* slide show */}
+
+        {/* right: auto-advancing slideshow */}
         <div className="w-full flex flex-col justify-center items-center gap-4">
-          <h2 className="text-3xl sm:text-4xl md:text-3xl lg:text-4xl text-center hi-melody text-[#ffa23f]">It's Always Day 1</h2>
-          <SlideShow />
+          <h2 className="w-full max-w-2xl text-right font-tektur text-lg sm:text-xl text-white">It&apos;s always day one!</h2>
+          <div className="w-full max-w-2xl aura-maroon-img rounded-xl overflow-hidden">
+            <SlideShow />
+          </div>
         </div>
       </div>
     </>
