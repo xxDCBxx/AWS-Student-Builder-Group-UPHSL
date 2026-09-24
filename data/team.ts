@@ -43,11 +43,11 @@ export const teamYears: TeamYear[] = [
         linkedin: "https://www.linkedin.com/in/rain-jade-de-castro-6bba75339/",
       },
       {
-        img: "/data/New Officers/Gil Ashley Bien - Executive Secretary.png",
-        name: "Gil Ashley Bien",
+        img: "/data/New Officers/Mara Colleen Espanola - Executive Secretary.png",
+        name: "Mara Colleen Española",
         title: "Executive Secretary",
         subtitle: "Manages records, documentation, and official communications.",
-        facebook: "https://www.facebook.com/gil.ashley.bien",
+        facebook: "https://www.facebook.com/maracolleen.espanola.23",
         linkedin: "",
       },
       {
@@ -139,11 +139,11 @@ export const teamYears: TeamYear[] = [
         linkedin: "https://www.linkedin.com/in/alyssa-valera-1553352b3/",
       },
       {
-        img: "/data/New Officers/Jedidiah Barcelona - Content Manager.png",
-        name: "Jedidiah Barcelona",
+        img: "/data/New Officers/Zachary Kyle Navarrete - Content Manager.png",
+        name: "Zachary Kyle Navarrete",
         title: "Content Manager",
         subtitle: "Creates and manages written and digital content.",
-        facebook: "https://www.facebook.com/jedidiah.barcelona",
+        facebook: "https://www.facebook.com/zacharykyle.navarrete",
         linkedin: "",
       },
       {
@@ -176,6 +176,22 @@ export const teamYears: TeamYear[] = [
         title: "Video Editor",
         subtitle: "Edits and produces video content for various platforms.",
         facebook: "https://www.facebook.com/kyllevincent.amondina.1",
+        linkedin: "",
+      },
+      {
+        img: "/data/New Officers/Ann Louise Swift - Digital Artist.png",
+        name: "Ann Louise Swift",
+        title: "Digital Artist",
+        subtitle: "Creates digital artwork and visual assets for the organization.",
+        facebook: "https://www.facebook.com/ann.swift.305839",
+        linkedin: "",
+      },
+      {
+        img: "/data/New Officers/Chloe Angielanna Alejo - Graphics Designer.png",
+        name: "Chloe Angielanna Alejo",
+        title: "Graphics Designer",
+        subtitle: "Designs visual content and graphics for marketing and promotions.",
+        facebook: "https://www.facebook.com/chloecoquette",
         linkedin: "",
       },
       {
