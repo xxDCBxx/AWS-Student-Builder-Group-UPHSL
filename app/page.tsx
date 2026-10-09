@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'AWS Student Builder Group - UPHSL | Home',
     description: 'Join the AWS Student Builder Group at University of Perpetual Help System Laguna',
+    images: ['/awssbg logo.png'],
   },
 };
 
