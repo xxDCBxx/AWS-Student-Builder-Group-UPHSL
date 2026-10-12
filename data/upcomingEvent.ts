@@ -5,7 +5,7 @@ export const upcomingEvents = [
     title: "Build with Awie! – A Chatbot-Based Puzzle Solving Game via Discord",
     subtitle:
       "An interactive educational game designed to help participants master AWS concepts through critical thinking and problem-solving. Puzzles focus on semimonthly challenges, continuous skill-building, and a point-based reward system to grant players exclusive access to AWS merchandise and deals.",
-    date: "Semi-Monthly, Starting September 2026",
+    date: "TBA",
     time: "TBA",
     location: "AWS Student Builder Group - UPHSL Discord Server",
     type: EventType.COMPETITION,
@@ -14,7 +14,7 @@ export const upcomingEvents = [
     title: "TechTuhan (Reworked)",
     subtitle:
       "A dynamic, media-driven interactive session designed to inspire students through the shared career journeys and insights of guest speakers. Taking inspiration from the popular podcast format, the session blends technical communication with entertainment (\"infotainment\")—featuring debates on trending tech discussions from Reddit and LinkedIn, deep dives into new AWS technologies, and exclusive reveals of puzzle solutions from the \"Build with Awie!\" games.",
-    date: "Monthly, Starting September 2026",
+    date: "TBA",
     time: "TBA",
     location: "AWS Student Builder Group - UPHSL Discord Server",
     type: EventType.SEMINAR,
