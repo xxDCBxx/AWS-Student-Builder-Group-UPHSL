@@ -35,7 +35,7 @@ export const teamYears: TeamYear[] = [
         linkedin: "",
       },
       {
-        img: "/data/New Officers/Rain Jade De Castro - Vice President.png",
+        img: "/data/New Officers/Rain Jade De Castro - Vice President.webp",
         name: "Rain Jade De Castro",
         title: "Vice President",
         subtitle: "Supports the president and oversees operations.",
