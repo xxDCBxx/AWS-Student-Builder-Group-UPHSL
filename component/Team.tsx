@@ -208,13 +208,19 @@ const Team: React.FC = () => {
                   className="relative rounded-2xl overflow-hidden aura-maroon mb-3"
                   style={{ width: CARD_W, height: CARD_W }}
                 >
-                  <Image
-                    src={member.img}
-                    alt={member.name}
-                    fill
-                    className="object-cover object-top"
+                  {member.img ? (
+                    <Image
+                      src={member.img}
+                      alt={member.name}
+                      fill
+                      className="object-cover object-top"
                     sizes={`${CARD_W}px`}
                   />
+                  ) : (
+                    <div className="w-full h-full bg-white/10 flex items-center justify-center">
+                      <span className="text-white/40 text-xs text-center px-2">Photo to follow</span>
+                    </div>
+                  )}
                 </div>
                 <p className="font-tektur text-xs tracking-widest text-[#ffa23f] uppercase mb-0.5 leading-tight truncate">
                   {member.title}
