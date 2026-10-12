@@ -11,21 +11,25 @@ const members = [
   { name: "Zain Raza Khan", role: "Head of Operations (HO)", img: "/data/New Officers/Zain Raza Khan - Head of Operations (HO).png" },
   { name: "Trisha Biglete", role: "Head of Relations and Community Outreach (HRC)", img: "/data/New Officers/Trisha Biglete - Head of Relations and Community Outreach (HRC).png" },
   { name: "Alyssa Marie Valera", role: "Head of Marketing and Multimedia (HMM)", img: "/data/New Officers/Alyssa Marie Valera - Head of Marketing and Multimedia (HMM).png" },
-  { name: "Gil Ashley Bien", role: "Executive Secretary", img: "/data/New Officers/Gil Ashley Bien - Executive Secretary.png" },
+  { name: "Mara Colleen Española", role: "Executive Secretary", img: "/data/New Officers/Gil Ashley Bien - Executive Secretary.png" },
   { name: "Auxi Nicole Pongos", role: "Associate Secretary", img: "/data/New Officers/Auxi Nicole Pongos - Associate Secretary.png" },
   { name: "Yzabel Claurie Nett Mallari", role: "Treasurer", img: "/data/New Officers/Yzabel Claurie Nett Mallari - Treasurer.png" },
   { name: "Claurenz Mallari", role: "Auditor", img: "/data/New Officers/Claurenz Mallari - Auditor.png" },
-  { name: "Allyza Shamel Hernandez", role: "Internal Relation Officer", img: "/data/New Officers/Allyza Shamel Hernandez - Internal Relation Officer.png" },
+  { name: "Andrei Emmanuel C. Padre", role: "Internal Relation Officer", img: "" },
   { name: "Don Santiago Sigue", role: "External Relation Officer", img: "/data/New Officers/Don Santiago Sigue - External Relation Officer.png" },
   { name: "Irish Nicole Montañez", role: "Communications Manager", img: "/data/New Officers/Irish Nicole Montañez Communications Manager.png" },
   { name: "Angela Shayne Montañez", role: "Social Media Marketing Manager", img: "/data/New Officers/Angela Shayne Montañez - Social Media Marketing Manager.png" },
-  { name: "Jedidiah Barcelona", role: "Content Manager", img: "/data/New Officers/Jedidiah Barcelona - Content Manager.png" },
+  { name: "Zachary Kyle Navarrete", role: "Content Manager", img: "" },
   { name: "Jasmine Fae Dictado", role: "Multimedia Specialist", img: "/data/New Officers/Jasmine Fae Dictado - Multimedia Specialist.png" },
+  { name: "Ann Louise Swift", role: "Digital Artist", img: "" },
+  { name: "Chloe Angielianna Alejo", role: "Graphics Designer", img: "" },
+  { name: "Samuel Gabriel M Diaz", role: "Graphics Designer", img: "" },
   { name: "Kylle Vincent Amondina", role: "Video Editor", img: "/data/New Officers/Kylle Vincent Amondina - Video Editor.png" },
   { name: "Lucky Angel Guevarra", role: "Community Manager", img: "/data/New Officers/Lucky Angel Guevarra - Community Manager.png" },
   { name: "Norven Zaldy Carandang", role: "Logistics Coordinator", img: "/data/New Officers/Norven Zaldy Carandang -Logistics Coordinator.png" },
   { name: "Christopher James Nuqui", role: "Web Development Specialist", img: "/data/New Officers/Christopher James Nuqui - Web Development Specialist.png" },
   { name: "Alliana Faith Palmiery", role: "Support Staff", img: "/data/New Officers/Alliana Faith Palmiery - Support Staff.png" },
+  { name: "Syla B. De La Trinidad", role: "Support Staff", img: "/data/New Officers/Syla B. De La Trinidad - Support Staff.png" },
   { name: "Zyrus Alvez", role: "Consultant", img: "/data/New Officers/Zyrus Alvez - Consultant.png" },
 ];
 
@@ -74,12 +78,18 @@ const Team: React.FC = () => {
             {visible.map((member) => (
               <div key={member.name} className="flex flex-col text-white">
                 <div className="relative aspect-square rounded-2xl overflow-hidden aura-maroon mb-3">
-                  <Image
-                    src={member.img}
-                    alt={member.name}
-                    fill
-                    className="object-cover"
-                  />
+                  {member.img ? (
+                    <Image
+                      src={member.img}
+                      alt={member.name}
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-white/10 flex items-center justify-center">
+                      <span className="text-white/40 text-xs text-center px-2">Photo to follow</span>
+                    </div>
+                  )}
                 </div>
                 <h2 className="font-tektur font-bold text-xs sm:text-sm leading-snug">{member.name}</h2>
                 <p className="font-tektur text-xs text-white/70 mt-1 leading-snug">{member.role}</p>
