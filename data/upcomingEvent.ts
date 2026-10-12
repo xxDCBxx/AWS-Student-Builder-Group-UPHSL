@@ -2,15 +2,6 @@ import { EventType } from "@/component/UpcomingEvent/Card"
 
 export const upcomingEvents = [
   {
-    title: "Start From Zero with Kiro – An Introduction to Kiro",
-    subtitle:
-      "A hands-on developer event designed to help students discover the fundamentals of AI-powered software development with Kiro, Amazon’s AI-powered IDE. Sessions focus on practical development workflows, specification-driven application building, and future learning opportunities through the AWS Student Builder Group to prepare participants for real-world software projects.",
-    date: "August 2026",
-    time: "TBA",
-    location: "Macintosh Laboratory, UPHSL",
-    type: EventType.WORKSHOP,
-  },
-  {
     title: "Build with Awie! – A Chatbot-Based Puzzle Solving Game via Discord",
     subtitle:
       "An interactive educational game designed to help participants master AWS concepts through critical thinking and problem-solving. Puzzles focus on semimonthly challenges, continuous skill-building, and a point-based reward system to grant players exclusive access to AWS merchandise and deals.",

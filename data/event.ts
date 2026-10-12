@@ -11,6 +11,24 @@ type Event = {
 
 export const events: Event[] = [
   {
+    title: "Cryptita Plays Web3 SUI Workshop",
+    subtitle:
+      "A hands-on Web3 workshop designed to guide students and builders from theoretical concepts to active onchain development. Sessions focus on integrating web applications with smart contracts, managing wallet interactions, and deploying live applications to equip participants for real-world blockchain building.",
+    date: "August 23, 2026",
+    location: "",
+    type: EventType.WORKSHOP,
+    pictures: "/event/SUI Workshop",
+  },
+  {
+    title: "𝗦𝘁𝗮𝗿𝘁 𝗙𝗿𝗼𝗺 𝗭𝗲𝗿𝗼 𝘄𝗶𝘁𝗵 𝗞𝗶𝗿𝗼 – 𝗔𝗻 𝗜𝗻𝘁𝗿𝗼𝗱𝘂𝗰𝘁𝗶𝗼𝗻 𝘁𝗼 𝗞𝗶𝗿𝗼",
+    subtitle:
+      "An interactive, hands-on workshop designed to introduce developers to Kiro and the shift from standard AI coding to agentic engineering. Participants will learn how to integrate agentic workflows into their development toolkit, streamline problem-solving, and elevate their programming capabilities for modern software builds.",
+    date: "August 1, 2026",
+    location: "Macintosh Laboratory, UPHSL",
+    type: EventType.WORKSHOP,
+    pictures: "/event/Kiro",
+  },
+  {
     title: "Ideathon 2026",
     subtitle:
       "A competitive ideation event where students collaborate to solve real-world challenges using AWS solutions and architecture. Participants develop, refine, and pitch innovative ideas, building skills in creativity, teamwork, and problem solving.",

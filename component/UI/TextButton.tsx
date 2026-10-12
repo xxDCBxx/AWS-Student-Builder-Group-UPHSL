@@ -12,7 +12,7 @@ const TextButton = ({ children, onClick, className }: Props) => {
   return (
     <button
       onClick={onClick}
-      className={`text-white transition-all duration-300 cursor-pointer ${className}`}
+      className={`font-tektur text-white transition-all duration-300 cursor-pointer ${className}`}
       onMouseEnter={(e) =>
         (e.currentTarget.style.textShadow =
           "0 0 8px #ff66cc, 0 0 16px #ff66cc, 0 0 24px #ff66cc")

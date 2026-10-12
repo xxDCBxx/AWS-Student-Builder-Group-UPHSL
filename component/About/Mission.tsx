@@ -3,13 +3,13 @@ const Mission = () => {
     <div className="flex flex-col gap-10">
       {/* MISSION */}
       <div className="flex flex-col items-center">
-        <h2 className="font-tektur tracking-widest text-white text-lg sm:text-xl mb-3">MISSION</h2>
+        <h2 className="font-tektur tracking-widest text-white text-2xl sm:text-3xl mb-4">MISSION</h2>
         <div className="relative w-full">
           <div
             className="tech-frame bg-black/40 backdrop-blur-sm p-6 text-center"
             style={{ clipPath: "polygon(4% 0, 96% 0, 100% 25%, 100% 100%, 4% 100%, 0 75%, 0 0)" }}
           >
-            <p className="font-tektur text-[10px] sm:text-xs leading-relaxed text-white/90">
+            <p className="font-tektur text-sm sm:text-base leading-relaxed text-white/90">
               &quot;Our mission is to foster a friendly and collaborative environment where individuals interested in technology, especially AWS and cloud computing, can connect, learn, and grow. We aim to support members in developing their cloud skills, building meaningful connections, and exploring innovative solutions in the tech industry.&quot;
             </p>
           </div>
@@ -23,13 +23,13 @@ const Mission = () => {
 
       {/* VISION */}
       <div className="flex flex-col items-center">
-        <h2 className="font-tektur tracking-widest text-white text-lg sm:text-xl mb-3">VISION</h2>
+        <h2 className="font-tektur tracking-widest text-white text-2xl sm:text-3xl mb-4">VISION</h2>
         <div className="relative w-full">
           <div
             className="tech-frame bg-black/40 backdrop-blur-sm p-6 text-center"
             style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 8% 100%, 0 70%)" }}
           >
-            <p className="font-tektur text-[10px] sm:text-xs leading-relaxed text-white/90">
+            <p className="font-tektur text-sm sm:text-base leading-relaxed text-white/90">
               &quot;To create a supportive space at the University of Perpetual Help System Laguna, where students and tech enthusiasts can come together to explore, learn, and share emerging technologies, with a focus on AWS and cloud computing.&quot;
             </p>
           </div>

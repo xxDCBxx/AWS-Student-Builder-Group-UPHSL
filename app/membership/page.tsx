@@ -181,7 +181,7 @@ const MembershipForm = () => {
                 <input type="text" name="program" value={formData.program} onChange={handleChange} placeholder="ex. BSCS - DS / BSIT - GD" required className="w-full px-3 py-2 bg-white/20 border border-white/30 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#ffa23f]" />
               </div>
               <div>
-                <label className="block text-white font-medium mb-2">Year and Section for A.Y. '25-'26 *</label>
+                <label className="block text-white font-medium mb-2">Year and Section *</label>
                 <input type="text" name="yearSection" value={formData.yearSection} onChange={handleChange} placeholder="ex. J3A" required className="w-full px-3 py-2 bg-white/20 border border-white/30 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#ffa23f]" />
               </div>
               <div className="md:col-span-2">
